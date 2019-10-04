@@ -31,7 +31,7 @@ from seecr.utils import isRootUser
 
 if __name__ == '__main__':
     if isRootUser():
-        print "Do not run as root user!"
+        print("Do not run as root user!")
         exit(2)
 
     from meresco.components import ParseArguments
