@@ -2,8 +2,7 @@
 #
 # "Seecr Test Extra" provides extra test tools - which bring in lots of dependencies.
 #
-# Copyright (C) 2017 SURF https://surf.nl
-# Copyright (C) 2017-2019 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2019 Seecr (Seek You Too B.V.) http://seecr.nl
 #
 # This file is part of "Seecr Test Extra"
 #
@@ -23,8 +22,17 @@
 #
 ## end license ##
 
-from selenium.webdriver.remote.webelement import WebElement
-# allows WebElements to be used in WebDriverWait which expects a WebDriver
+from os import getuid
+assert getuid() != 0, "Do not run tests as 'root'"
 
-def patchWebElementWithGetAttr():
-    WebElement.__getattr__ = lambda self, x: getattr(self.parent, x)
+from seecrdeps import includeParentAndDeps, cleanup  #DO_NOT_DISTRIBUTE
+includeParentAndDeps(__file__, scanForDeps=True)     #DO_NOT_DISTRIBUTE
+cleanup(__file__)                                    #DO_NOT_DISTRIBUTE
+
+from unittest import main
+
+from onetest import OneTest
+
+
+if __name__ == '__main__':
+    main()

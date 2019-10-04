@@ -1,9 +1,9 @@
+#!/bin/bash
 ## begin license ##
 #
 # "Seecr Test Extra" provides extra test tools - which bring in lots of dependencies.
 #
-# Copyright (C) 2017 SURF https://surf.nl
-# Copyright (C) 2017-2019 Seecr (Seek You Too B.V.) http://seecr.nl
+# Copyright (C) 2019 Seecr (Seek You Too B.V.) http://seecr.nl
 #
 # This file is part of "Seecr Test Extra"
 #
@@ -23,8 +23,22 @@
 #
 ## end license ##
 
-from selenium.webdriver.remote.webelement import WebElement
-# allows WebElements to be used in WebDriverWait which expects a WebDriver
+set -e
 
-def patchWebElementWithGetAttr():
-    WebElement.__getattr__ = lambda self, x: getattr(self.parent, x)
+rm -rf tmp build
+
+python3 setup.py install --root tmp
+
+export PYTHONPATH=`pwd`/tmp/usr/local/lib/`py3versions -d`/dist-packages
+cp -r test tmp/test
+#cp seecr/__init__.py $PYTHONPATH/seecr/
+#cp seecr/test/__init__.py $PYTHONPATH/seecr/test/
+
+set +e
+(
+    cd tmp/test
+    ./alltests.sh
+)
+set -e
+
+rm -rf tmp build

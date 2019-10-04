@@ -1,0 +1,10 @@
+seecr-core (>= 2.0)
+seecr-core (<< 2.1)
+seecr-tools-core (>= 0.2.4.1)
+seecr-tools-core (<< 0.3)
+python3-lxml
+python3-weightless-core
+python3-escaping
+python3-meresco-core
+python3-meresco-components
+python3-meresco-oai
