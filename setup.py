@@ -33,20 +33,18 @@ for path, dirs, files in walk('bin'):
         scripts.append(join(path, file))
 
 setup(
-    name='seecr-test-extra',
+    name='meresco-testsupport',
     version='%VERSION%',
     packages=[
-        'seecr',       # DO_NOT_DISTRIBUTE
-        'seecr.test',  # DO_NOT_DISTRIBUTE
-        'seecr.test.extra',
-        'seecr.test.extra.selenium',
+        'meresco',       # DO_NOT_DISTRIBUTE
+        'meresco.testsupport',
     ],
     scripts=scripts,
-    url='http://www.seecr.nl',
+    url='https://www.seecr.nl',
     author='Seecr',
     author_email='info@seecr.nl',
-    description='Seecr Test Extra provides extra test tools',
-    long_description='Seecr Test Extra provides extra test tools - which bring in lots of dependencies.',
+    description='Meresco Testsupport provides extra test tools',
+    long_description='Meresco Testsupport provides extra test tools.',
     platforms=['linux'],
 )
 

@@ -1,6 +1,7 @@
 python3-lxml
-python3-weightless-core
+python3-weightless-core (>= 0.12.1)
 python3-escaping
-python3-meresco-core
-python3-meresco-components
+python3-meresco-core (>= 4.1)
+python3-meresco-components (>= 4.16.0.2)
 python3-meresco-oai
+python3-seecr-test (>= 2.1.1)

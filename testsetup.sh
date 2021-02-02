@@ -3,7 +3,7 @@
 #
 # "Meresco Testsupport" provides extra test tools.
 #
-# Copyright (C) 2019, 2021 Seecr (Seek You Too B.V.) https://seecr.nl
+# Copyright (C) 2020-2021 Seecr (Seek You Too B.V.) https://seecr.nl
 #
 # This file is part of "Meresco Testsuport"
 #
@@ -23,22 +23,20 @@
 #
 ## end license ##
 
-set -e
-
+set -o errexit
 rm -rf tmp build
+mydir=$(cd $(dirname $0); pwd)
+source /usr/share/seecr-tools/functions.d/test
 
-python3 setup.py install --root tmp
+definePythonVars
+${PYTHON} setup.py install --root tmp
 
-export PYTHONPATH=`pwd`/tmp/usr/local/lib/`py3versions -d`/dist-packages
 cp -r test tmp/test
-#cp seecr/__init__.py $PYTHONPATH/seecr/
-#cp seecr/test/__init__.py $PYTHONPATH/seecr/test/
+removeDoNotDistribute tmp
+find tmp -name '*.py' -exec sed -r -e "
+    s,^usrSharePath = .*,usrSharePath = '$mydir/tmp/usr/share/meresco-testsupport',;
+    " -i '{}' \;
 
-set +e
-(
-    cd tmp/test
-    ./alltests.sh
-)
-set -e
+runtests "$@"
 
 rm -rf tmp build
