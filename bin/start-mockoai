@@ -42,6 +42,6 @@ if __name__ == '__main__':
     parser.addOption('', '--batchSize', type='int', help='The oai batch size')
     options, arguments =  parser.parse()
 
-    from seecr.test.mockoaiserver import startServer
+    from meresco.testsupport.mockoaiserver import startServer
     startServer(**vars(options))
 
