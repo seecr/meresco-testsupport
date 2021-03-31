@@ -27,6 +27,11 @@
 from seecrdeps import includeParentAndDeps       #DO_NOT_DISTRIBUTE
 includeParentAndDeps(__file__)                    #DO_NOT_DISTRIBUTE
 
+from lucene import initVM
+initVM()
+from meresco_oai import initVM
+initVM()
+
 from seecr.utils import isRootUser
 
 if __name__ == '__main__':
