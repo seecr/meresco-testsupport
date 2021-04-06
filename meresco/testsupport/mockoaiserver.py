@@ -34,7 +34,7 @@ from time import sleep
 
 from escaping import escapeFilename
 
-from weightless.core import compose, be
+from weightless.core import compose, be, consume
 from weightless.io import Reactor
 
 from meresco.components.json import JsonList
@@ -157,8 +157,8 @@ def startServer(port, dataDir=None, jsonConfig=None, batchSize=None):
         reactor = Reactor()
         server = be(dna(reactor, port, config=config, tempDir=tempDir, batchSize=batchSize))
         print('Ready to rumble the mock plein server at', port)
-        list(compose(server.once.observer_init()))
-        registerShutdownHandler(statePath=tempDir, server=server, reactor=reactor)
+        consume(server.once.observer_init())
+        registerShutdownHandler(statePath=tempDir, server=server, reactor=reactor, shutdownMustSucceed=False)
         stdout.flush()
         reactor.loop()
     finally:
