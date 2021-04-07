@@ -72,7 +72,7 @@ class MockAdminServer(MockServer):
     def _findIdentifier(self, **kwargs):
         identifier = None
         if 'Body' in kwargs:
-            identifier = parse_qs(kwargs['Body']).get('identifier', [None])[0]
+            identifier = parse_qs(str(kwargs['Body'], encoding='utf-8')).get('identifier', [None])[0]
         if not identifier:
             identifier = kwargs.get('arguments', {}).get('identifier', [None])[0]
         return identifier
