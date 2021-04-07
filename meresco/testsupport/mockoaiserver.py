@@ -145,10 +145,11 @@ class DataStorage(object):
         yield
 
 
-def startServer(port, dataDir=None, jsonConfig=None, batchSize=None):
+def startServer(port, dataDir=None, jsonConfig=None, batchSize=None, tempDir=None):
     batchSize = batchSize or DEFAULT_BATCH_SIZE
     setSignalHandlers()
-    tempDir = mkdtemp(prefix='mockoai-')
+    rmTempDir = tempDir is None
+    tempDir = mkdtemp(prefix='mockoai-') if tempDir is None else tempDir
 
     config = JsonList.loads(jsonConfig or '[]')
     if dataDir:
@@ -162,4 +163,5 @@ def startServer(port, dataDir=None, jsonConfig=None, batchSize=None):
         stdout.flush()
         reactor.loop()
     finally:
-        rmtree(tempDir)
+        if rmTempDir:
+            rmtree(tempDir)

@@ -45,6 +45,7 @@ if __name__ == '__main__':
     parser.addOption('', '--jsonConfig', type='str', help='Configuration with directories and path; Or use dataDir', mandatory=False)
     parser.addOption('', '--dataDir', type='str', action='append', help='The main datadir; Or use jsonConfig', mandatory=False)
     parser.addOption('', '--batchSize', type='int', help='The oai batch size')
+    parser.addOption('', '--tempDir', help='Tempdir for storage, created if not given.')
     options, arguments =  parser.parse()
 
     from meresco.testsupport.mockoaiserver import startServer
