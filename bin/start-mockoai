@@ -27,6 +27,9 @@
 from seecrdeps import includeParentAndDeps       #DO_NOT_DISTRIBUTE
 includeParentAndDeps(__file__)                    #DO_NOT_DISTRIBUTE
 
+from warnings import filterwarnings
+filterwarnings('ignore', message=r".*has no __module__ attribute.*", category=DeprecationWarning)
+
 from lucene import initVM
 initVM()
 from meresco_oai import initVM
