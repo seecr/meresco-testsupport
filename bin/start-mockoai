@@ -30,10 +30,7 @@ includeParentAndDeps(__file__)                    #DO_NOT_DISTRIBUTE
 from warnings import filterwarnings
 filterwarnings('ignore', message=r".*has no __module__ attribute.*", category=DeprecationWarning)
 
-from lucene import initVM
-initVM()
-from meresco_oai import initVM
-initVM()
+from seecr_initvm import initvm; initvm("meresco_lucene", "meresco_oai")
 
 from seecr.utils import isRootUser
 
